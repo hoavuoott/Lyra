@@ -32,3 +32,30 @@
 #lyricpreview.layout-digitalglitch .glitch-burst:after{opacity:.8}
 #lyricpreview.layout-revealglow .type-word{overflow:visible;flex-wrap:wrap}
 .loop-controls{padding:10px 0;border-top:1px solid #3b4534}.loop-controls label{font-size:10px;display:flex;gap:8px;align-items:center}.loop-controls p{font-size:9px;color:#a4b095;line-height:1.6}
+
+/* Time-driven effects: no CSS animation is used on rendered lyrics. */
+#lyricpreview.layout-typewritertext{letter-spacing:0;gap:.08em .3em}
+#lyricpreview.layout-slideinletter .type-word{overflow:hidden}
+#lyricpreview.layout-fliptext .type-glyph{transform-origin:50% 100%}
+#lyricpreview.layout-rotateintext .type-glyph{transform-origin:50% 65%}
+#lyricpreview.layout-kinetictypography{gap:.12em .3em}
+#lyricpreview .motion-accent{color:var(--type-accent)}
+#stage.uniform-text #lyricpreview .motion-accent{color:var(--lyric-color)}
+#lyricpreview.kinetic-solo:not(.manual-layout){display:grid;grid-template-columns:1fr;place-items:center}
+#lyricpreview.kinetic-solo:not(.manual-layout) .type-word{grid-area:1/1}
+#lyricpreview.layout-strikethroughtext{padding-top:1em;padding-bottom:.2em}
+#lyricpreview.layout-strikethroughtext .type-ink{position:relative}
+#lyricpreview .motion-strike{position:absolute;left:-.03em;right:-.03em;top:48%;height:.065em;background:var(--type-accent);transform-origin:left center;border-radius:.08em;pointer-events:none}
+#lyricpreview .motion-correction{position:absolute;left:0;bottom:20%;white-space:nowrap!important;font-size:.65em;font-style:italic;font-weight:600;color:var(--type-accent);transform-origin:left bottom;pointer-events:none}
+#lyricpreview.word-cloud-preset{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;gap:.3em .4em;padding:.35em .25em}
+#lyricpreview.word-cloud-preset .type-word{translate:0 var(--cloud-offset,0);padding:.12em .1em}
+#motionpresetoptions{border-bottom:1px solid #394735;padding:0 0 12px;margin-bottom:14px}
+#motionpresetoptions h3{font-size:16px;color:#e7f5bb;margin-top:0}
+#motionpresetoptions input[type=text]{width:100%;font-size:14px}
+#effects .featured-motion .fx-sample{font-size:26px;line-height:1.2;letter-spacing:0}
+#effects [data-fx=StrikethroughText] .fx-sample{text-decoration:line-through;text-decoration-color:#d899c9}
+#effects [data-fx=BlurInText] .fx-sample{text-shadow:2px 0 3px #c6d7bc}
+#effects [data-fx=FlipText] .fx-sample{transform:perspective(100px) rotateX(-20deg)}
+#effects [data-fx=RotateInText] .fx-sample{rotate:-12deg}
+
+.effect-library-head>span{font-size:12px;letter-spacing:0;color:#a4b095}.effect-library-head #effectlibrarycount{color:#d7e9b8;white-space:nowrap}

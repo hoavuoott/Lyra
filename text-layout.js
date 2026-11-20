@@ -7,11 +7,12 @@
   function plan(count,settings={},text=''){const c=config(settings),rng=random(c.seed^hash(text)),positions=Array.from({length:count},(_,i)=>i);return Array.from({length:count},(_,index)=>({index,order:positions[index],scale:c.sizeMode==='random'?1+(rng()*2-1)*c.spread:1,rotate:c.mode==='random'?(rng()*2-1)*7:0,x:c.mode==='random'?(rng()*2-1)*.08:0,y:c.mode==='stairs'?(index%4)*.18:0,align:c.mode==='random'?['start','center','end'][Math.floor(rng()*3)]:'center'}))}
   function apply(container,nodes,settings,text){const c=config(settings),items=plan(nodes.length,c,text);if(c.mode!=='preset'){container.classList.add('manual-layout','arrange-'+c.mode);for(const node of nodes)container.append(node);for(const row of container.querySelectorAll('.type-row'))row.remove();container.style.setProperty('--layout-columns',c.columns);container.style.setProperty('--layout-gap',c.gap+'em');container.style.setProperty('--layout-align',c.align==='left'?'flex-start':c.align==='right'?'flex-end':'center')}
     nodes.forEach((node,index)=>{const item=items[index];node.classList.add('layout-word');if(c.sizeMode!=='preset')node.style.setProperty('font-size',item.scale.toFixed(4)+'em','important');if(c.mode==='random'){node.style.order=item.order;node.style.rotate=item.rotate.toFixed(3)+'deg';node.style.translate=item.x.toFixed(3)+'em 0';node.style.alignSelf=item.align;node.style.justifySelf=item.align}if(c.mode==='stairs')node.style.translate='0 '+item.y.toFixed(3)+'em';});return c}
+  function cloud(container,nodes,settings,text){const c=config(settings),rng=random(c.seed^hash(text));container.classList.add('word-cloud-preset');nodes.forEach((node,i)=>{if(c.sizeMode==='preset')node.style.fontSize=(.65+rng()*.8).toFixed(4)+'em';node.style.rotate=((rng()-.5)*14).toFixed(3)+'deg';node.style.translate='0 '+((rng()-.5)*.24).toFixed(3)+'em';if(i%3===1)node.classList.add('motion-accent')})}
   function fits(container,nodes,settings,height){
     if(container.scrollWidth>container.clientWidth+2||container.scrollHeight>height*.76)return false;
     const c=config(settings),css=getComputedStyle(container),padding=(parseFloat(css.paddingLeft)||0)+(parseFloat(css.paddingRight)||0),gap=parseFloat(css.columnGap)||0;
     const width=container.clientWidth-padding,slot=['grid','random'].includes(c.mode)?(width-gap*(c.columns-1))/c.columns:width;
     return nodes.every(node=>Math.max(node.offsetWidth,node.scrollWidth)<=slot+1);
   }
-  const api={defaults,config,plan,apply,fits};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LyraLayout=api;
+  const api={defaults,config,plan,apply,cloud,fits};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LyraLayout=api;
 })(typeof globalThis==='undefined'?this:globalThis);

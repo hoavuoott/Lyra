@@ -1,0 +1,9 @@
+(function(root){
+  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+  function transform(raw={},image=false){return {x:clamp(Number.isFinite(+raw.x)?+raw.x:image?50:0,-200,300),y:clamp(Number.isFinite(+raw.y)?+raw.y:image?50:0,-200,300),rotate:clamp(Number(raw.rotate)||0,-3600,3600),scale:clamp(Number(raw.scale)||1,.1,8)}}
+  function effect(kind,p,exit=false){p=clamp(p,0,1);const q=1-Math.pow(1-p,3),off=1-q,sign=exit?-1:1;let x=0,y=0,scale=1,rotate=0,blur=0,opacity=kind==='none'?1:q;switch(kind){case'slide-left':x=-100*off*sign;break;case'slide-right':x=100*off*sign;break;case'slide-up':y=100*off*sign;break;case'zoom':scale=.45+.55*q;break;case'spin':rotate=-90*off*sign;scale=.6+.4*q;break;case'blur':blur=18*off;break}return {x,y,scale,rotate,blur,opacity}}
+  function frame(asset,time){const duration=Math.max(.02,asset.end-asset.start),local=time-asset.start,enter=Math.min(Math.max(.01,+asset.enterDuration||.4),duration*.45),leave=Math.min(Math.max(.01,+asset.exitDuration||.4),duration*.45),a=effect(asset.enter||'fade',local/enter),b=effect(asset.exit||'fade',(duration-local)/leave,true);return {visible:local>=0&&local<duration,opacity:a.opacity*b.opacity,x:a.x+b.x,y:a.y+b.y,scale:a.scale*b.scale,rotate:a.rotate+b.rotate,blur:a.blur+b.blur}}
+  function gifFrame(durations,time){const total=durations.reduce((n,v)=>n+Math.max(.02,v),0);if(!total)return 0;let point=((time%total)+total)%total;for(let i=0;i<durations.length;i++){point-=Math.max(.02,durations[i]);if(point<0)return i}return durations.length-1}
+  function wordTransform(line,index){const item=line.wordTransforms?.[index],text=line.text.trim().split(/\s+/)[index];return transform(item?.text===text?item:{})}
+  const api={transform,effect,frame,gifFrame,wordTransform};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LyraSceneCore=api;
+})(typeof globalThis==='undefined'?this:globalThis);
