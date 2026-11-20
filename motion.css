@@ -1,0 +1,17 @@
+/* Only lyric content is rendered on the stage; no corner HUD or slogans. */
+#lyricpreview{display:flex;flex-wrap:wrap;align-content:center;align-items:center;justify-content:center;gap:.12em .26em;width:82%;max-height:78%;line-height:1.22;letter-spacing:-.045em;font-weight:800;perspective:900px}
+#lyricpreview .motion-word{display:block;flex:0 1 auto;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere;transform-origin:50% 85%;will-change:transform,opacity;backface-visibility:hidden}
+#lyricpreview.layout-kinetic{display:grid;grid-template-columns:repeat(3,minmax(0,max-content));gap:.18em .55em;transform:rotate(-3deg);font-weight:800;line-height:1.1}
+#lyricpreview.layout-kinetic .motion-word:nth-child(3n+1){font-size:1.3em;text-transform:uppercase}
+#lyricpreview.layout-kinetic .motion-word:nth-child(3n){font-size:.82em;-webkit-text-stroke:1px var(--lyric-color,#e9ff8b);color:transparent}
+#lyricpreview.layout-stack{flex-direction:column;flex-wrap:nowrap;gap:.01em;line-height:1.04}
+#lyricpreview.layout-stack .motion-word:nth-child(even){align-self:center;margin-left:1.2em;-webkit-text-stroke:1px var(--lyric-color,#e9ff8b);color:transparent}
+#lyricpreview.layout-split .motion-word:nth-child(even){-webkit-text-stroke:1px var(--lyric-color,#e9ff8b);color:transparent}
+#lyricpreview.layout-pendulum .motion-word{transform-origin:50% -60%}
+#lyricpreview.layout-stomp{font-weight:900;text-transform:uppercase;letter-spacing:-.06em}
+.motion-controls{padding:14px;background:#232923;border:1px solid #3b4534;border-radius:6px;margin-bottom:17px}.motion-controls .field{margin:5px 0 14px}.motion-controls .field:last-child{margin-bottom:0}.motion-controls .hint{margin:8px 0 0;font-size:9px}.motion-controls output{float:right;color:var(--accent)}
+#effects{max-height:390px;overflow:auto;padding:3px;gap:7px}#effects button{position:relative;height:83px;text-align:left;padding:10px;overflow:hidden}#effects button .fx-sample{display:block;font-size:21px;line-height:1.15;font-weight:800;color:#d5ddc4;margin-bottom:7px;width:max-content}#effects button .fx-label{display:block;font-size:9px;color:#aeb5a8}#effects button.active .fx-sample,#effects button.active .fx-label{color:var(--accent)}#effects button:hover .fx-sample{animation:fx-bounce .7s infinite alternate ease-in-out}#effects button:nth-child(3n):hover .fx-sample{animation:fx-spin .9s infinite alternate ease-in-out}#effects button:nth-child(4n):hover .fx-sample{animation:fx-stretch .7s infinite alternate ease-in-out}
+@keyframes fx-bounce{0%{transform:translateY(4px) scale(1.15,.8)}100%{transform:translateY(-5px) rotate(-6deg) scale(.95,1.08)}}@keyframes fx-spin{from{transform:rotate(-12deg) scale(.8)}to{transform:rotate(10deg) scale(1.1)}}@keyframes fx-stretch{from{transform:scale(.8,1.15)}to{transform:scale(1.1,.85)}}
+@media(prefers-reduced-motion:reduce){#effects button:hover .fx-sample{animation:none}}
+@media(max-width:650px){#lyricpreview{font-size:var(--preview-size,40px)!important}#effects{grid-template-columns:repeat(3,1fr)}}
+
