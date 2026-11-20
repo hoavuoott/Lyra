@@ -10,7 +10,7 @@
   document.addEventListener('pointerup',()=>setTimeout(()=>{group=null},0));
   document.addEventListener('pointercancel',()=>{group=null});
   document.addEventListener('keydown',e=>{
-    if(e.isComposing)return;
+    if(e.isComposing)return;if(window.LyraExportBusy){if(e.code==='Space'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z')){e.preventDefault();e.stopImmediatePropagation()}return;}
     if((e.code==='Space'||e.key===' ')&&!e.target.matches('#projectnameinput,#decorationpanel textarea')){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat)$('play').click();return}
     if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){
       e.preventDefault();e.stopImmediatePropagation();if(e.repeat)return;

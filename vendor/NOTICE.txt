@@ -1,0 +1,3 @@
+Mediabunny 1.66.2 and @mediabunny/aac-encoder 1.66.2: MPL-2.0. Unmodified distributions and corresponding source: https://registry.npmjs.org/mediabunny/-/mediabunny-1.66.2.tgz and https://registry.npmjs.org/@mediabunny/aac-encoder/-/aac-encoder-1.66.2.tgz
+AAC WASM contains FFmpeg under LGPL 2.1; notices and source/build instructions: FFmpeg-LICENSE.md and https://github.com/Vanilagy/mediabunny/tree/v1.66.2/packages/aac-encoder
+html-to-image 1.11.13: MIT. Source: https://registry.npmjs.org/html-to-image/-/html-to-image-1.11.13.tgz
